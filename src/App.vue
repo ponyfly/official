@@ -1,26 +1,80 @@
 <template>
   <div id="app">
-    hello
+    <swiper :options="swiperOption">
+      <swiper-slide>
+        <img class="slide-img" src="./imgs/01.jpg" alt="">
+      </swiper-slide>
+      <swiper-slide>
+        <swiper-hor :options="swiperHorOption">
+          <swiper-slide-hor>
+            <img class="slide-img" src="./imgs/02.jpg" alt="">
+          </swiper-slide-hor>
+          <swiper-slide-hor>
+            <img class="slide-img" src="./imgs/03.jpg" alt="">
+          </swiper-slide-hor>
+          <swiper-slide-hor>
+            <img class="slide-img" src="./imgs/04.jpg" alt="">
+          </swiper-slide-hor>
+          <swiper-slide-hor>
+            <img class="slide-img" src="./imgs/05.jpg" alt="">
+          </swiper-slide-hor>
+          <div class="swiper-pagination swiper-pagination-white" slot="pagination"></div>
+          <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+          <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+        </swiper-hor>
+      </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
   </div>
 </template>
 
 <script>
+  import './style/swiper-3.4.2.min.css'
+  import {swiper, swiperSlide} from 'vue-awesome-swiper'
 export default {
   name: 'App',
+  data() {
+    return {
+      swiperOption: {
+        direction: 'vertical',
+        slidesPerView: 1,
+        spaceBetween: 30,
+        mousewheel: true,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        }
+      },
+      swiperHorOption: {
+        spaceBetween: 30,
+        effect: 'fade',
+        width: window.innerWidth,
+        height: window.innerHeight,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      }
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide,
+    'swiper-hor': swiper,
+    'swiper-slide-hor': swiperSlide
+  }
 }
 </script>
 
 <style>
   @import "style/reset.css";
-  #app {width: 100%; height:100%;}
-  #app .pages {width: 100%; height:100%; overflow-y: scroll; position: relative;}
-  #app .pages .page-1 {width: 100%; height:100%; }
-  #app .pages .page-1 .img-po {width: 100%; height:100%; background-color: #f66;}
-  #app .pages .page-2 {width: 100%; height:100%;}
-  #app .pages .page-2 .slides {width: 100%; height:100%; overflow-x: scroll}
-  #app .pages .page-2 .slides .slide{width: 100%; height:100%;}
-  #app .pages .page-2 .slides .slide .slide1{width: 100%; height:100%; background-color: cornflowerblue;}
-  #app .pages .page-2 .slides .slide .slide2{width: 100%; height:100%; background-color: cadetblue;}
-  #app .pages .page-2 .slides .slide .slide3{width: 100%; height:100%; background-color: darkblue;}
-  #app .pages .page-2 .slides .slide .slide4{width: 100%; height:100%; background-color: fuchsia;}
+  #app {width: 100%; height:100%; overflow:hidden;}
+  .slide-img {width: 100%; height:100%;}
+  .swiper-container-vertical>.swiper-pagination-bullets { top:25%;}
 </style>
